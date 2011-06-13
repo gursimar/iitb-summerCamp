@@ -1,0 +1,29 @@
+%x=0:0.01:10
+%y=x/100;
+
+%plot(x,y);
+%hold on;
+
+%a=1/sqrt(2);
+%M=[a a;-a a];
+
+r=5;
+x=r*cos(0:0.1:2*pi)
+y=r*sin(0:0.1:2*pi)
+z=zeros(length(x));
+
+plot3(x,y,z,'r');
+hold on;
+xlim ([-10 10]);
+ylim ([-10 10]);
+zlim ([-10 10]);
+title ('Demonstrating projects');
+
+Rz=[cos(theta) -sin(theta) 0; sin(theta) cos(theta) 0; 0 0 1];
+[x1 y1 z1]' = Rz*[x y z];
+
+plot3(x,y)
+
+
+
+
