@@ -1,0 +1,11 @@
+function juliaAnimation(zMax,c,N)
+no=500;
+mat = linspace(-zMax,zMax,no);
+[R I] = meshgrid(mat,mat);
+Z = R +iI;
+
+M = n*ones(length(Z));
+
+for n = 1:N
+    Z = Z.^2+c;
+    fin

@@ -1,0 +1,9 @@
+clear all;
+%close all;
+clc
+
+[t,x] = ode23(@vander_de,[0,100],[0 0.1]);
+plot(x(:,1),x(:,2))
+hold all;
+
+
