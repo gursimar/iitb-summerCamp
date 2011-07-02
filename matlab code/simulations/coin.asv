@@ -1,0 +1,23 @@
+% This script simulates a fair coin and plots its various results.
+
+N=50;
+H=0;
+T=0;
+
+headbytail = zeros (1,N);
+
+for n=1:N
+    k=rand;
+    if(k<0.5)
+        H=H+1;
+    else
+        T=T+1;
+    end
+    headbytail(n) = H/H+T;
+end
+    
+plot(1:N,headbytail);
+hold on;
+%plot(51:A,1);
+
+title('Ratio of heads by tail')

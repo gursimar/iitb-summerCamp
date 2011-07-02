@@ -1,0 +1,52 @@
+% This script simulates a coin flip 100 times and we can do N trials of the
+% experiment
+
+% Experiment - 100 coin flipps
+% No of Trails - N
+
+close all;
+%clear all;
+clc
+
+N=100000;
+H=0;
+T=0;
+
+headbytail = zeros(1,N);
+headminustail = zeros(1,N);
+
+
+for l = 1:N
+    H=0;
+    T=0;
+    % This is one single experiment simulating 100 coin flipps
+    for n=1:100
+        k=rand;
+        if(k<0.5)
+            H=H+1;
+        else
+            T=T+1;
+        end
+    end
+    % End of the experiment.
+    % We calculate H/T and H-T for each experiment.
+    headminustail(l) = abs(H-T);
+    headbytail(l) = headminustail(l)/(H+T)*100;
+end
+figure
+hold on;
+title('Experiment - 100 coin flipps');
+xlabel ('Experiment number');
+ylabel('% difference bw head and tails');
+plot(1:N,headbytail,'LineWidth',2);
+plot(1:N,mean(headbytail));
+hold off;
+
+figure
+hold on;
+title('100 flipps 100000 trails');
+xlabel('Absolute difference bw heads and tails');
+ylabel('No of trails');
+hist(headminustail);
+plot(mean(headminustail),0:0.1:25)
+hold off;
