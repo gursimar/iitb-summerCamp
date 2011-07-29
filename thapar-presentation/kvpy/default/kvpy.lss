@@ -1,0 +1,213 @@
+
+kvpy.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000e2  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  00000136  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000027  00000000  00000000  00000156  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000000af  00000000  00000000  0000017d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 0000007b  00000000  00000000  0000022c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000010a  00000000  00000000  000002a7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000030  00000000  00000000  000003b4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000089  00000000  00000000  000003e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e2 ee       	ldi	r30, 0xE2	; 226
+  68:	f0 e0       	ldi	r31, 0x00	; 0
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 36       	cpi	r26, 0x60	; 96
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 51 00 	call	0xa2	; 0xa2 <main>
+  8a:	0c 94 6f 00 	jmp	0xde	; 0xde <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <initADC>:
+#include <avr/io.h>
+#include <util/delay.h>
+
+void initADC()
+{
+   ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // Set ADC prescalar to 128 - 125KHz sample rate @ 16MHz 
+  92:	86 b1       	in	r24, 0x06	; 6
+  94:	87 60       	ori	r24, 0x07	; 7
+  96:	86 b9       	out	0x06, r24	; 6
+
+   ADMUX |= (1 << REFS0); // Set ADC reference to AVCC
+  98:	3e 9a       	sbi	0x07, 6	; 7
+   ADMUX |= (1 << ADLAR); // Left adjust ADC result to allow easy 8 bit reading 
+  9a:	3d 9a       	sbi	0x07, 5	; 7
+
+   	// No MUX values needed to be changed to use ADC0 
+
+	//   ADCSRA |= (1 << ADATE);  // Set ADC auto trigger enable
+   ADCSRA |= (1 << ADEN);  // Enable ADC 
+  9c:	37 9a       	sbi	0x06, 7	; 6
+
+	/* The ADSC bit is 1 when the conversion is going on and
+	cleared by harware when done */
+   ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  9e:	36 9a       	sbi	0x06, 6	; 6
+
+}
+  a0:	08 95       	ret
+
+000000a2 <main>:
+
+
+int main (void) 
+{ 
+
+   DDRD=0xFF;	//used as output pins
+  a2:	8f ef       	ldi	r24, 0xFF	; 255
+  a4:	81 bb       	out	0x11, r24	; 17
+   DDRB=0x00;	//used as output pins
+  a6:	17 ba       	out	0x17, r1	; 23
+#include <avr/io.h>
+#include <util/delay.h>
+
+void initADC()
+{
+   ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // Set ADC prescalar to 128 - 125KHz sample rate @ 16MHz 
+  a8:	86 b1       	in	r24, 0x06	; 6
+  aa:	87 60       	ori	r24, 0x07	; 7
+  ac:	86 b9       	out	0x06, r24	; 6
+
+   ADMUX |= (1 << REFS0); // Set ADC reference to AVCC
+  ae:	3e 9a       	sbi	0x07, 6	; 7
+   ADMUX |= (1 << ADLAR); // Left adjust ADC result to allow easy 8 bit reading 
+  b0:	3d 9a       	sbi	0x07, 5	; 7
+
+   	// No MUX values needed to be changed to use ADC0 
+
+	//   ADCSRA |= (1 << ADATE);  // Set ADC auto trigger enable
+   ADCSRA |= (1 << ADEN);  // Enable ADC 
+  b2:	37 9a       	sbi	0x06, 7	; 6
+
+	/* The ADSC bit is 1 when the conversion is going on and
+	cleared by harware when done */
+   ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  b4:	36 9a       	sbi	0x06, 6	; 6
+  b6:	20 e0       	ldi	r18, 0x00	; 0
+  b8:	30 e0       	ldi	r19, 0x00	; 0
+      } 
+
+	  
+	  else
+	  {
+         PORTD = 0b00000001; // Turn ON LED1 
+  ba:	91 e0       	ldi	r25, 0x01	; 1
+       //PORTD = PINB&0b00000001; // Turn on LED2
+//	   _delay_ms(1000);
+
+// LOOP
+	//start conversion...
+	   ADCSRA |= (1 << ADSC);  // Start A2D Conversions 
+  bc:	36 9a       	sbi	0x06, 6	; 6
+
+	// This one waits until the conversion completes..	
+	  while((ADCSRA&(1<<ADSC))==1);
+  be:	86 b1       	in	r24, 0x06	; 6
+	  //_delay_ms(8000);
+
+	// Turns ON the relevant LED
+	  if(ADCH < 165) 
+  c0:	85 b1       	in	r24, 0x05	; 5
+  c2:	85 3a       	cpi	r24, 0xA5	; 165
+  c4:	40 f4       	brcc	.+16     	; 0xd6 <main+0x34>
+      { 
+		 i++;
+  c6:	2f 5f       	subi	r18, 0xFF	; 255
+  c8:	3f 4f       	sbci	r19, 0xFF	; 255
+		 if(i>1000)
+  ca:	83 e0       	ldi	r24, 0x03	; 3
+  cc:	29 3e       	cpi	r18, 0xE9	; 233
+  ce:	38 07       	cpc	r19, r24
+  d0:	a8 f3       	brcs	.-22     	; 0xbc <main+0x1a>
+		 {
+	         PORTD = 0b00000000; // Turn OFF LED1 
+  d2:	12 ba       	out	0x12, r1	; 18
+  d4:	01 c0       	rjmp	.+2      	; 0xd8 <main+0x36>
+      } 
+
+	  
+	  else
+	  {
+         PORTD = 0b00000001; // Turn ON LED1 
+  d6:	92 bb       	out	0x12, r25	; 18
+  d8:	20 e0       	ldi	r18, 0x00	; 0
+  da:	30 e0       	ldi	r19, 0x00	; 0
+  dc:	ef cf       	rjmp	.-34     	; 0xbc <main+0x1a>
+
+000000de <_exit>:
+  de:	f8 94       	cli
+
+000000e0 <__stop_program>:
+  e0:	ff cf       	rjmp	.-2      	; 0xe0 <__stop_program>
